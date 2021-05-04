@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const ObjectId = require('mongodb').ObjectId;
 const Department = require('../models/department.model');
 
 router.get('/departments', async (req, res) => {
@@ -13,7 +12,6 @@ router.get('/departments', async (req, res) => {
 });
 
 router.get('/departments/random', async (req, res) => {
-
   try {
     const count = await Department.countDocuments();
     const rand = Math.floor(Math.random() * count);
@@ -24,11 +22,9 @@ router.get('/departments/random', async (req, res) => {
   catch(err) {
     res.status(500).json({ message: err });
   }
-
 });
 
 router.get('/departments/:id', async (req, res) => {
-
   try {
     const dep = await Department.findById(req.params.id);
     if(!dep) res.status(404).json({ message: 'Not found' });
@@ -37,27 +33,21 @@ router.get('/departments/:id', async (req, res) => {
   catch(err) {
     res.status(500).json({ message: err });
   }
-
 });
 
 router.post('/departments', async (req, res) => {
-
   try {
-
     const { name } = req.body;
     const newDepartment = new Department({ name: name });
     await newDepartment.save();
     res.json({ message: 'OK' });
-
   } catch(err) {
     res.status(500).json({ message: err });
   }
-
 });
 
 router.put('/departments/:id', async (req, res) => {
   const { name } = req.body;
-
   try {
     const dep = await(Department.findById(req.params.id));
     if(dep) {
@@ -70,11 +60,9 @@ router.put('/departments/:id', async (req, res) => {
   catch(err) {
     res.status(500).json({ message: err });
   }
-
 });
 
 router.delete('/departments/:id', async (req, res) => {
-
   try {
     const dep = await(Department.findById(req.params.id));
     if(dep) {
@@ -86,14 +74,6 @@ router.delete('/departments/:id', async (req, res) => {
   catch(err) {
     res.status(500).json({ message: err });
   }
-
-});
-
-router.delete('/departments/:id', (req, res) => {
-  req.db.collection('departments').deleteOne({ _id: ObjectId(req.params.id) }, err => {
-    if(err) res.status(500).json({ message: err });
-    else res.json({ message: 'OK' });
-  });
 });
 
 module.exports = router;
