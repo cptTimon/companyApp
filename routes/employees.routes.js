@@ -1,5 +1,4 @@
 const express = require('express');
-const { restart } = require('nodemon');
 const router = express.Router();
 const Employee = require('../models/department.model');
 
@@ -72,7 +71,7 @@ router.delete('/employees/:id', async (req, res) => {
       await Employee.deleteOne({ _id: req.params.id });
       res.json({ message: 'OK' });
     }
-    else restart.status(404).json({ message: 'Not found...'});
+    else res.status(404).json({ message: 'Not found...'});
   }
   catch(err) {
     res.status(500).json({ message: err });
