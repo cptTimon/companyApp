@@ -55,7 +55,7 @@ router.put('/employees/:id', async (req, res) => {
       dep.lastName = lastName;
       dep.department = department;
       await dep.save();
-      res.json({ message: 'OK' });
+      res.json(dep);
     }
     else res.status(404).json({ message: 'Not found...' });
   }
@@ -69,7 +69,7 @@ router.delete('/employees/:id', async (req, res) => {
     const dep = await(Employee.findById(req.params.id));
     if(dep) {
       await Employee.deleteOne({ _id: req.params.id });
-      res.json({ message: 'OK' });
+      res.json(dep);
     }
     else res.status(404).json({ message: 'Not found...'});
   }
