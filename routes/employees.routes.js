@@ -3,6 +3,7 @@ const router = express.Router();
 
 const EmployeeController = require('../controllers/employees.controller');
 
+
 router.get('/employees', EmployeeController.getAll);
 
 router.get('/employees/random', EmployeeController.getRandom);
