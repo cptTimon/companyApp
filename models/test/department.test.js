@@ -10,6 +10,7 @@ describe('Department', () => {
       expect(err.errors.name).to.exist;
     });
   });
+
   it('should throw an error if "name" is not a string', () => {
     const cases = [{}, []];
     for(let name of cases) {
@@ -19,6 +20,7 @@ describe('Department', () => {
       });
     }
   });
+
   it('should check if "name" has proper length', () => {
     names = ['gfgf', 'abcabcabcabcabcabcabcabcabc'];
     for(let name of names) {
@@ -28,6 +30,7 @@ describe('Department', () => {
       });
     }
   });
+
   it('should throw no errors when pass proper "name"', () => {
     const names = ['firstName', 'secondName', 'thirdName'];
     for(let name of names) {
@@ -37,6 +40,7 @@ describe('Department', () => {
       });
     }
   });
+  
   after(() => {
     mongoose.models = {};
   });

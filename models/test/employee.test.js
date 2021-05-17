@@ -6,6 +6,7 @@ describe('Employee', () => {
   after(() => {
     mongoose.models = {};
   });
+  
   it('should throw an error if any arg is missing', () => {
     
     const cases = [
@@ -30,6 +31,7 @@ describe('Employee', () => {
       });
     }
   });
+
   it('should throw an error if "firstName" is not a string', () => {
     const cases = [{}, []];
     for(let test of cases) {
@@ -39,6 +41,7 @@ describe('Employee', () => {
       });
     }
   });
+
   it('should throw an error if "lastName" is not a string', () => {
     const cases = [{}, []];
     for(let test of cases) {
@@ -48,6 +51,7 @@ describe('Employee', () => {
       });
     }
   });
+
   it('should throw an error if "department" is not a string', () => {
     const cases = [{}, []];
     for(let test of cases) {
@@ -57,6 +61,7 @@ describe('Employee', () => {
       });
     }
   });
+
   it('should throw no errors when pass proper args', () => {
     const cases = [
       {
