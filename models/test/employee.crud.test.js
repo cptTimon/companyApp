@@ -25,14 +25,12 @@ describe('Employee', () => {
 
       const testDep = new Department({ name: 'ITDepartment'})
       testDep.save();
-      console.log(testDep);
 
       const testEmpTwo = new Employee({ firstName: 'FirstName #2', lastName: 'LastName #2', department: 'Department #2' });
       await testEmpTwo.save();
 
       const testEmpThree = new Employee({ firstName: 'FirstName #3', lastName: 'LastName #3', department: testDep._id });
       await testEmpThree.save();
-      console.log(testEmpThree);
       
     });
 
@@ -51,14 +49,14 @@ describe('Employee', () => {
       expect(employeeByDepartment.department).to.be.equal('Department #2');
     });
     
-    // to jest ten test co nie przechodzi
     it('should return object with data when using "populate" method on "department" attribute', async () => {
-      const employee = Employee.find().populate('department');
-      expect(employee.length).to.be.equal(1);
+      const employee = await Employee.findOne({ firstName: 'FirstName #3' }).populate('department');
+      expect(employee.department.name).to.be.equal('ITDepartment');
     });
 
     after(async () => {
       await Employee.deleteMany();
+      await Department.deleteMany();
     });
   });
 
