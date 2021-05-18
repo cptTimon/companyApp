@@ -24,7 +24,7 @@ exports.getRandom = async (req, res) => {
 
 exports.getById = async (req, res) => {
   try {
-    const dep = await Department.getById(req.params.id);
+    const dep = await Department.findById(req.params.id);
     if(!dep) res.status(404).json({ message: 'Not found...' });
     else res.json(dep);
   }
